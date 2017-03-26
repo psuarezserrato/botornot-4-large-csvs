@@ -128,3 +128,5 @@ Con este archivo podemos pasar a la fase de visualización simple.
 
 Este tutorial está siendo distribuido bajo una licencia Creative Commons Attribution-NonCommercial-ShareAlike 
 CC BY-NC-SA. ;)
+
+![CC license](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/CC-bon.png)
