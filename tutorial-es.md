@@ -1,5 +1,5 @@
 # Detectando Bots
-This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API. It's a tutorial in Spanish. Please read [Clayton Davis BotOrNot API page](https://github.com/truthy/botornot-python) first! 
+This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API. It's a tutorial in Spanish. Please read [Clayton Davis' BotOrNot API page](https://github.com/truthy/botornot-python) first! 
 
 __Tutorial en Español__
 
