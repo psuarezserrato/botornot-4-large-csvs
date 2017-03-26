@@ -1,11 +1,10 @@
 # Detectando Bots
-%% This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API.
-Mention Claytons Tutorial first!
+This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API. It's a tutorial in Spanish. Please read [Clayton Davis BotOrNot API page](https://github.com/truthy/botornot-python) first!
 %% 
 
 __Tutorial en Español__
 
-Esta es una manera de revisar cuentas de Twitter usando BotOrNot, para darles probabilidades en 6 categorías que evalúan la posibilidad de que las cuentas sean bots. Vamos a asumir que tenemos ya una aplicación de Twitter inicializada, con claves, secretos y pases listos.
+Esta es una manera de revisar cuentas de Twitter usando _BotOrNot_, para darles probabilidades en 6 categorías que evalúan la posibilidad de que las cuentas sean bots. Vamos a asumir que tenemos ya una aplicación de Twitter inicializada, con claves, secretos y pases listos.
 
 En una libreta de Jupyter vamos primero a cargar los módulos que vamos a usar para evaluar las cuentas:
 
@@ -68,14 +67,14 @@ for api_key in twitter_app_auth.values():
     assert not api_key.startswith('COPY_')
 ```
 
-Ahora inicializamos el API de BorOrNot:
+Ahora inicializamos el API de _BorOrNot_:
 
 ```python
 bon = botornot.BotOrNot(**twitter_app_auth)
 api = bon.twitter_api
 ```
 
-Ya estamos listos para el paso importante, mandar llamar a BorOrNot usando nuesta lista de cuentas
+Ya estamos listos para el paso importante, llamar a _BorOrNot_ usando nuesta lista de cuentas:
 
 ```python
 import time 
@@ -187,9 +186,9 @@ Este es un ejemplo de lo que se obtiene, en este caso con tuits que usaron la et
 
 ![Ejemplo de distribución de puntajes de Red](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/Network-dist-Tanhuato_19-20_8_16.png)
 
-Vemos una señal prominente en .8, lo que indica que estas cuentas son muy probablemente bots y que ademas tienen las mismas características, lo cuál sucedería si todas fueron automatizadas con los mismos parámetros de comportamiento.
+Vemos una señal prominente en .8, lo que indica que estas cuentas son muy probablemente bots y que ademas tienen las mismas características, lo cuál sucedería si todas fueron automatizadas (programadas) con los mismos parámetros de comportamiento.
 
-Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible hacerlo facilmente en 2D . Por ejemplo, comparemos puntajes de Red y Amigos:
+Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es sencillo en 2D. Por ejemplo, comparemos puntajes de Red y Amigos:
 
 ```python
 sns.set(style="white")
