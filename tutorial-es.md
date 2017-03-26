@@ -183,44 +183,42 @@ ax.patch.set_visible(True)
 filename = 'Network-Cuentas'
 plt.savefig(filename)
 ```
-Este es un ejemplo de la lo que se obtiene, en este caso fue con tuits que usaron la etiqueta #Tanhuato:
+Este es un ejemplo de lo que se obtiene, en este caso con tuits que usaron la etiqueta #Tanhuato:
 
 ![Ejemplo de distribución de puntajes de Red](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/Network-dist-Tanhuato_19-20_8_16.png)
 
-Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible hacerlo facilmente en 2D . Por ejemplo, comparemos puntajes de Red y Temporales:
+Vemos una señal prominente en .8, lo que indica que estas cuentas son muy probablemente bots y que ademas tienen las mismas características, lo cuál sucedería si todas fueron automatizadas con los mismos parámetros de comportamiento.
+
+Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible hacerlo facilmente en 2D . Por ejemplo, comparemos puntajes de Red y Amigos:
 
 ```python
 sns.set(style="white")
 
-x1 = df[df['temporal_classification'].notnull()]['temporal_classification']
+x1 = df[df['friend_classification'].notnull()]['friend_classification']
 x2 = df[df['network_classification'].notnull()]['network_classification']
-x1 = pd.Series(x1, name="Temporal class")
+x1 = pd.Series(x1, name="Friend class")
 x2 = pd.Series(x2, name="Net class")
 
 g = sns.jointplot(x1, x2, kind="kde", n_levels=60, shade=True, size=12, space=0)
 
-filename = 'KDE-Net-Temporal-Cuentas'
+filename = 'KDE-Friend-Temporal-Cuentas'
 plt.savefig(filename)
 ```
-Como antes, va un ejemplo de #Tanuato :
+Como antes, va un ejemplo de #Tanhuato :
 
+![Ejemplo de KDE en 2D combinando Red y Amigos](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/KDE-Friend-Net-Tanhuato_19-20_8_16.png)
 
-
-
+Se aprecia un cúmulo de cuentas con una distribución muy uniforme en la esquina superior derecha, la zona de los bots.
 
 De esta manera podemos identificar cúmulos de cuentas que son potencialmente bots dejando que los datos guíen el análisis. 
 
-```python
+Estos métodos fueron desarrollados para [éste artículo](https://link.springer.com/chapter/10.1007/978-3-319-47874-6_19), disponible con [libre acceso aquí](https://arxiv.org/abs/1609.08239).
 
-```
+__Suárez-Serrato, Pablo, Margaret E. Roberts, Clayton Davis, and Filippo Menczer. "On the influence of social bots in online protests." In International Conference on Social Informatics, pp. 269-278. Springer International Publishing, 2016.__
 
+Agradezco que [se cite](http://dblp.uni-trier.de/rec/bibtex/journals/corr/Suarez-SerratoR16) este trabajo si se usan estos métodos o códigos.
 
-
-
-
-
-
-
+También agradezco apoyos de CONACyT, PAPIIT-UNAM y al IPAM en UCLA.
 
 Este tutorial está siendo distribuido bajo una licencia Creative Commons Attribution-NonCommercial-ShareAlike 
 CC BY-NC-SA. ;)
