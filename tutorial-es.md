@@ -1,5 +1,7 @@
 # Detectando Bots
-%% This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API.%% 
+%% This is a simple way to time Twitter's API so that a large file of accounts can be checked with the BotOrNor API.
+Mention Claytons Tutorial first!
+%% 
 
 __Tutorial en Español__
 
@@ -110,7 +112,7 @@ for user_id in df3[:4999]:
 print("Done.")
 ```
 
-Cuando el proceso anterior haya terminado (esto puede durar mucho si tenemos muchas cuentas) guardamos los resultados:
+Cuando el proceso anterior haya terminado (esto puede durar mucho si tenemos muchas cuentas) guardamos los resultados (sí, es un «hack» barato):
 
 ```python
 import pickle
@@ -118,11 +120,96 @@ sresults = pickle.dumps(results)
 pickle.dump(sresults, open('Cuentas.pkl', 'wb')) 
 ```
 
-Con este archivo podemos pasar a la fase de visualización simple.
+Con este archivo podemos pasar a la fase de visualización simple. Abrimos el archivo que creamos con los puntajes:
+
+```python
+import pickle
+
+sresults = pickle.loads(pickle.load(open('Cuentas.pkl', 'rb')))
+```
+
+Preparamos una nueva «data frame» que vamos a usar para analizar los puntajes de _BotOrNot_:
+
+```python
+users = []; content = []; friend = []; network = []; sentiment = []; temporal = []; userc = []
+for user, user_dict in sresults.items() :
+    users.append(user)
+    content.append(user_dict['categories']['content_classification'])
+    friend.append(user_dict['categories']['friend_classification'])
+    network.append(user_dict['categories']['network_classification'])
+    sentiment.append(user_dict['categories']['sentiment_classification'])
+    temporal.append(user_dict['categories']['temporal_classification'])
+    userc.append(user_dict['categories']['user_classification'])
+```
+
+Ahora creamos esta nueva «data frame»:
+
+```python
+import pandas
+df = pandas.DataFrame({'user': users, 'content_classification': content, 'friend_classification': friend, 'network_classification': network,
+  'sentiment_classification': sentiment,
+  'temporal_classification': temporal,
+  'user_classification': userc})
+```
+
+En este momento ya somos capaces de empezar a visualizar los puntajes obtenidos, por ejemplo en la categoría de «Network», usando un estimado de la densidad de núcleo, conocido como «kernel density estimate»:
+
+```python
+from __future__ import print_function, unicode_literals
+
+import datetime
+import json
+import re
+import time
+import traceback
+import botornot
+import pandas as pd
+import requests
+import seaborn as sns
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+scores = df[df['network_classification'].notnull()]['network_classification']
+sns.set(rc={"figure.figsize": (12, 6)})
+ax = sns.distplot(scores)
+ax.set_title('Distribución de puntajes de Red, «Network», obtenidos con BotOrNot en Cuentas.csv')
+ax.set_xlim([0,1])
+ax.set_xlabel('Content classification')
+ax.yaxis.set_visible(True)
+ax.patch.set_visible(True)
+
+filename = 'Network-Cuentas'
+plt.savefig(filename)
+```
+
+Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible en 2D y en 3D. Por ejemplo, comparando puntajes de Red y Temporales:
+
+```python
+sns.set(style="white")
+
+x1 = df[df['temporal_classification'].notnull()]['temporal_classification']
+x2 = df[df['network_classification'].notnull()]['network_classification']
+x1 = pd.Series(x1, name="Temporal class")
+x2 = pd.Series(x2, name="Net class")
+
+g = sns.jointplot(x1, x2, kind="kde", n_levels=60, shade=True, size=12, space=0)
+
+filename = 'KDE-Net-Temporal-Cuentas'
+plt.savefig(filename)
+```
+De esta manera podemos identificar cúmulos de cuentas que son potencialmente bots dejando que los datos guíen el análisis. 
 
 ```python
 
 ```
+
+
+
+
+
+
 
 
 
