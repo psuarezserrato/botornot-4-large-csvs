@@ -219,6 +219,6 @@ Agradezco que [se cite](http://dblp.uni-trier.de/rec/bibtex/journals/corr/Suarez
 También agradezco apoyos de CONACyT, PAPIIT-UNAM y al IPAM en UCLA.
 
 Este tutorial está siendo distribuido bajo una licencia Creative Commons Attribution-NonCommercial-ShareAlike 
-CC BY-NC-SA. ;)
+CC BY-NC-SA. 
 
 ![CC license](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/CC-bon.png)
