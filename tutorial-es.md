@@ -183,8 +183,11 @@ ax.patch.set_visible(True)
 filename = 'Network-Cuentas'
 plt.savefig(filename)
 ```
+Este es un ejemplo de la lo que se obtiene, en este caso fue con tuits que usaron la etiqueta #Tanhuato:
 
-Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible en 2D y en 3D. Por ejemplo, comparando puntajes de Red y Temporales:
+![Ejemplo de distribución de puntajes de Red](https://github.com/psuarezserrato/botornot-4-large-csvs/blob/master/Network-dist-Tanhuato_19-20_8_16.png)
+
+Distintas cuentas se comportan de distintas maneras, por lo que es conveniente comparar varios puntajes a la vez. Esto es posible hacerlo facilmente en 2D . Por ejemplo, comparemos puntajes de Red y Temporales:
 
 ```python
 sns.set(style="white")
@@ -199,6 +202,12 @@ g = sns.jointplot(x1, x2, kind="kde", n_levels=60, shade=True, size=12, space=0)
 filename = 'KDE-Net-Temporal-Cuentas'
 plt.savefig(filename)
 ```
+Como antes, va un ejemplo de #Tanuato :
+
+
+
+
+
 De esta manera podemos identificar cúmulos de cuentas que son potencialmente bots dejando que los datos guíen el análisis. 
 
 ```python
